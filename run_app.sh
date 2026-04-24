@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$ROOT_DIR"
+
+if ! command -v npm >/dev/null 2>&1; then
+  echo "Error: npm is required but not installed." >&2
+  exit 1
+fi
+
+echo "[1/4] Installing root workspace dependencies..."
+npm install
+
+echo "[2/4] Copying environment templates when missing..."
+[[ -f backend/.env ]] || cp backend/.env.example backend/.env
+[[ -f frontend/.env ]] || cp frontend/.env.example frontend/.env
+
+echo "[3/4] Prisma generate (backend)..."
+npm run prisma:generate --workspace backend
+
+echo "[4/4] Starting frontend + backend..."
+exec npm run dev
