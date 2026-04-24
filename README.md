@@ -72,22 +72,6 @@ npm run dev
 - Frontend: `http://localhost:5173`
 - Backend: `http://localhost:4000`
 
-### One-command install + run
-
-macOS / Linux:
-
-```bash
-./run_app.sh
-```
-
-Windows (PowerShell):
-
-```powershell
-./run_app.ps1
-```
-
-These scripts install dependencies, create missing `.env` files from examples, run Prisma client generation, then start frontend and backend together.
-
 ## Run with Docker
 
 ```bash
