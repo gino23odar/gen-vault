@@ -1,0 +1,93 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Rarity {
+  COMMON
+  RARE
+  EPIC
+  MYTHIC
+}
+
+enum BirdStatus {
+  READY
+  FAILED
+  PROCESSING
+}
+
+model User {
+  id           String          @id @default(cuid())
+  email        String          @unique
+  passwordHash String
+  displayName  String
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+  birds        Bird[]
+  promptHistory PromptHistory[]
+}
+
+model Bird {
+  id             String       @id @default(cuid())
+  userId         String
+  name           String
+  prompt         String
+  style          String
+  mood           String
+  colorPalette   String
+  lore           String
+  rarity         Rarity
+  temperament    String
+  habitat        String
+  providerSource String
+  status         BirdStatus   @default(READY)
+  isFavorite     Boolean      @default(false)
+  displayOrder   Int          @default(0)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  image2d        BirdImage2D?
+  asset3d        BirdAsset3D?
+
+  @@index([userId, displayOrder])
+}
+
+model BirdImage2D {
+  id          String   @id @default(cuid())
+  birdId       String   @unique
+  url         String
+  thumbnailUrl String
+  width       Int?
+  height      Int?
+  provider    String
+  createdAt   DateTime @default(now())
+  bird        Bird     @relation(fields: [birdId], references: [id], onDelete: Cascade)
+}
+
+model BirdAsset3D {
+  id          String   @id @default(cuid())
+  birdId      String   @unique
+  modelUrl    String
+  previewUrl  String?
+  format      String   @default("glb")
+  provider    String
+  createdAt   DateTime @default(now())
+  bird        Bird     @relation(fields: [birdId], references: [id], onDelete: Cascade)
+}
+
+model PromptHistory {
+  id           String   @id @default(cuid())
+  userId        String
+  prompt       String
+  style        String
+  mood         String
+  colorPalette String
+  createdAt    DateTime @default(now())
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+}
