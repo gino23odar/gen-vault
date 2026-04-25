@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-forest-900 text-slate-100 antialiased;
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
+  background-image: radial-gradient(circle at 20% 0%, #1f352b 0%, #0f1b16 45%, #0a1410 100%);
+}
+
+.glass {
+  @apply bg-white/5 backdrop-blur-xl border border-white/10;
+}
