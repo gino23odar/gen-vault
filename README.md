@@ -72,6 +72,7 @@ npm run dev
 - Frontend: `http://localhost:5173`
 - Backend: `http://localhost:4000`
 
+<<<<<<< codex/build-forest-inspired-full-stack-web-app-iwrasi
 ### One-command install + run
 
 macOS / Linux:
@@ -88,14 +89,19 @@ Windows (PowerShell):
 
 These scripts start the full Docker stack (Postgres + backend + frontend) using `docker compose up --build`, so the database is included automatically.
 
+=======
+>>>>>>> main
 ## Run with Docker
 
 ```bash
 docker compose up --build
 ```
 
+<<<<<<< codex/build-forest-inspired-full-stack-web-app-iwrasi
 The backend container automatically applies Prisma schema with `prisma db push` before starting the dev server.
 
+=======
+>>>>>>> main
 Services:
 - Frontend: `http://localhost:5173`
 - Backend: `http://localhost:4000`

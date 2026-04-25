@@ -25,7 +25,10 @@ services:
       - '4000:4000'
     depends_on:
       - db
+<<<<<<< codex/build-forest-inspired-full-stack-web-app-iwrasi
     command: sh -c "npx prisma db push && npm run dev --workspace backend"
+=======
+>>>>>>> main
 
   frontend:
     build:
@@ -37,7 +40,10 @@ services:
       - '5173:5173'
     depends_on:
       - backend
+<<<<<<< codex/build-forest-inspired-full-stack-web-app-iwrasi
     command: npm run dev --workspace frontend
+=======
+>>>>>>> main
 
 volumes:
   postgres_data:
