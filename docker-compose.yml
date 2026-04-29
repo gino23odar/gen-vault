@@ -7,7 +7,7 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: verdant_vault
     ports:
-      - '5432:5432'
+      - '5433:5432'
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
@@ -25,6 +25,7 @@ services:
       - '4000:4000'
     depends_on:
       - db
+    command: sh -c "npx prisma db push && npm run dev --workspace backend"
 
   frontend:
     build:
@@ -36,6 +37,7 @@ services:
       - '5173:5173'
     depends_on:
       - backend
+    command: npm run dev --workspace frontend
 
 volumes:
   postgres_data:
